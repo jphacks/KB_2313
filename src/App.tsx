@@ -1,5 +1,5 @@
 import './App.css'
-import {WasteMap} from './components/WasteMap'
+import {WasteMap} from './components/wasteMap'
 
 function App() {
   return (
