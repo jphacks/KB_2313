@@ -8,7 +8,7 @@ type Position = {
 }
 
 const Component = () => {
-  const [currentPosition, setCurrentPosition] = useState<Position | null>(null);
+  const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
 
   useEffect(() => {
     if (navigator.geolocation) {
