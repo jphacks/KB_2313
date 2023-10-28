@@ -1,6 +1,8 @@
 import { GoogleMap, MarkerF} from "@react-google-maps/api";
 import React, {useState, useEffect } from "react";
 import { Map } from "./Map";
+import currentMarker from "../assets/map-pin-svgrepo-com.svg";
+
 
 type Position = {
     lat: number;
@@ -43,7 +45,7 @@ const Component = () => {
             zoom={15}
             onLoad={onLoad}
           >
-              <MarkerF position={currentPosition} />
+              <MarkerF position={currentPosition} icon={{ url: currentMarker }}/>
           </GoogleMap>
         ) : (
           "loading"
