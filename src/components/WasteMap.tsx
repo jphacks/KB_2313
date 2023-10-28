@@ -1,5 +1,5 @@
 import { GoogleMap, MarkerF} from "@react-google-maps/api";
-import React, { FC, useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import { Map } from "./Map";
 
 type Position = {
@@ -43,9 +43,7 @@ const Component = () => {
             zoom={15}
             onLoad={onLoad}
           >
-            {Array.from({ length: 10 }).map((_, index) => (
-              <MarkerF key={index} position={currentPosition} />
-            ))}
+              <MarkerF position={currentPosition} />
           </GoogleMap>
         ) : (
           "loading"
