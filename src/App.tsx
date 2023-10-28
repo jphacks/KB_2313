@@ -1,10 +1,10 @@
 import './App.css'
-
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import {WasteMap} from './components/WasteMap'
 
 function App() {
   return (
     <>
+    <WasteMap />
     </>
   )
 }
