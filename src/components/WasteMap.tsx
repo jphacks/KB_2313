@@ -1,4 +1,4 @@
-import { GoogleMap, Marker} from "@react-google-maps/api";
+import { GoogleMap, MarkerF} from "@react-google-maps/api";
 import React, { FC, useState, useEffect } from "react";
 import { Map } from "./Map";
 
@@ -44,7 +44,7 @@ const Component = () => {
             onLoad={onLoad}
           >
             {Array.from({ length: 10 }).map((_, index) => (
-              <Marker key={index} position={currentPosition} />
+              <MarkerF key={index} position={currentPosition} />
             ))}
           </GoogleMap>
         ) : (
