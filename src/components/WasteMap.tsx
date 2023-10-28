@@ -9,7 +9,7 @@ type Position = {
     lng: number;
 }
 
-const Component = () => {
+export default function WasteMap() {
   const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
 
   useEffect(() => {
@@ -52,6 +52,4 @@ const Component = () => {
         )}
       </>
     );
-  };
-
-  export const WasteMap = Component;
+  }
