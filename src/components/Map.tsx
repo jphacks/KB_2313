@@ -6,17 +6,13 @@ export type Map = google.maps.Map;
 
 const MAP_API_KEY = import.meta.env.VITE_API_KEY;
 
-type Props = {
-  defaultPosition: { lat: number; lng: number };
-};
-
-export const Map = ({ defaultPosition }: Props) => {
+export const Map = () => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map",
     googleMapsApiKey: MAP_API_KEY,
   });
 
-  const onLoad = (map: Map) => {
+  const onLoad = () => {
     // Do something when map is loaded.
   };
 

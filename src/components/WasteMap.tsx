@@ -1,5 +1,5 @@
-import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
-import React, { FC, useEffect, useState } from "react";
+import { GoogleMap, Marker} from "@react-google-maps/api";
+import React, { FC,useState } from "react";
 import { Map } from "./Map";
 
 interface Props {
