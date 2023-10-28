@@ -1,16 +1,16 @@
 import { GoogleMap, Marker} from "@react-google-maps/api";
-import React, { FC,useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { Map } from "./Map";
 
-interface Props {
-  defaultPosition: {
+type Position = {
     lat: number;
     lng: number;
-  };
 }
 
-const Component: FC<Props> = ({ defaultPosition}) => {
-  const [currentPosition, setCurrentPosition] = useState(defaultPosition);
+const Component = () => {
+  const [currentPosition, setCurrentPosition] = useState<Position | null>(null);
+
+  useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -24,15 +24,15 @@ const Component: FC<Props> = ({ defaultPosition}) => {
     } else {
       console.error("Error: Geolocation is not supported");
     }
+  }, []);
 
-  const { isLoaded, onLoad } = Map({
-    defaultPosition: currentPosition,
-  });
+  const { isLoaded, onLoad } = Map();
 
-    const containerStyle = {
-      height: "75vh",
-      width: "100vw",
-    };
+  const containerStyle = {
+    height: "75vh",
+    width: "100vw",
+  };
+
 
     return (
       <>
