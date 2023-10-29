@@ -13,8 +13,11 @@ import trashCanMarker from "../assets/trash-can-with-cover-from-side-view-svgrep
 
 
 export default function WasteMap() {
+
   const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
   const [trashCanLocations, setTrashCanLocations] = useState<TrashCanLocation[]>([]);
+  const [isAddtrashcanTrue, setIsAddtrashcanTrue] = useState<boolean>(false);
+
   const location = useLocation().search;
   const query = new URLSearchParams(location);
   console.log(query.get("isAddtrashcanTrue"));
@@ -99,7 +102,7 @@ export default function WasteMap() {
   const { isLoaded, onLoad } = Map();
 
   const containerStyle = {
-    height: "75vh",
+    height: "100vh",
     width: "100vw",
   };
 
@@ -125,9 +128,11 @@ export default function WasteMap() {
             ))}
               <MarkerF position={currentPosition}/>
           </GoogleMap>
+
         ) : (
           "loading"
         )}
+        {isAddtrashcanTrue && <h1>Can is added!</h1>}
       </>
     );
   }
