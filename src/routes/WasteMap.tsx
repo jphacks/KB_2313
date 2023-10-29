@@ -8,13 +8,16 @@ import { Map } from "../components/Map";
 import { Position } from "../types/position"
 import { TrashCanLocation } from "../types/trashCanLocation";
 
-import currentMarker from "../assets/map-pin-svgrepo-com.svg";
+import trashCanMarkerBlue from "../assets/trash-can-with-cover-from-side-view-svgrepo-com-blue.svg";
 import trashCanMarker from "../assets/trash-can-with-cover-from-side-view-svgrepo-com.svg";
 
 
 export default function WasteMap() {
+
   const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
   const [trashCanLocations, setTrashCanLocations] = useState<TrashCanLocation[]>([]);
+  const [isAddtrashcanTrue, setIsAddtrashcanTrue] = useState<boolean>(false);
+
   const location = useLocation().search;
   const query = new URLSearchParams(location);
   console.log(query.get("isAddtrashcanTrue"));
@@ -47,7 +50,8 @@ export default function WasteMap() {
           id: item.id,
           created_at: item.created_at,
           lat: item.trash_can_lat,
-          lng: item.trash_can_lng
+          lng: item.trash_can_lng,
+          is_trashcan_is_added: false
         })))
         console.log("trashCanLocations is set");
       } catch (error) {
@@ -71,6 +75,19 @@ export default function WasteMap() {
           if (error) {
             throw error;
           }
+          console.log("currentPosition is posted")
+          const { data, error: fetchError } = await supabase.from("trash_can_location").select("*").eq("trash_can_lat", currentPosition.lat).eq("trash_can_lng", currentPosition.lng);
+          if (fetchError) {
+            throw fetchError;
+          }
+          console.log("data is re fetched")
+          setTrashCanLocations((prevLocations) => [...prevLocations, {
+            id: data[0].id,
+            created_at: data[0].created_at,
+            lat: data[0].trash_can_lat,
+            lng: data[0].trash_can_lng,
+            is_trashcan_is_added: true
+          }]);
         } catch (error) {
           console.error(error);
         }
@@ -85,7 +102,7 @@ export default function WasteMap() {
   const { isLoaded, onLoad } = Map();
 
   const containerStyle = {
-    height: "75vh",
+    height: "100vh",
     width: "100vw",
   };
 
@@ -100,13 +117,22 @@ export default function WasteMap() {
             onLoad={onLoad}
           >
             {trashCanLocations.map((trashCanLocation) => (
-              <MarkerF key={trashCanLocation.id} position={trashCanLocation} icon={{ url : trashCanMarker }}/>
+              <MarkerF
+                title={"trash can"}
+                key={trashCanLocation.id}
+                position={trashCanLocation}
+                icon={{
+                  url: trashCanLocation.is_trashcan_is_added ? trashCanMarkerBlue : trashCanMarker
+                }}
+              />
             ))}
-              <MarkerF position={currentPosition} icon={{ url : currentMarker }}/>
+              <MarkerF position={currentPosition}/>
           </GoogleMap>
+
         ) : (
           "loading"
         )}
+        {isAddtrashcanTrue && <h1>Can is added!</h1>}
       </>
     );
   }
