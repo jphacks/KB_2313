@@ -60,10 +60,6 @@ export default function WasteMap() {
   useEffect(() => {
     if (query.get("isAddtrashcanTrue") === "True" && currentPosition.lat !== 0 && currentPosition.lng !== 0) {
       console.log("AddCurrentPosition is called");
-      //AddCurrentPosition(currentPosition);
-      //const handleAddCurrentPosition = async () => {
-      //  await AddCurrentPosition(currentPosition);
-      //};
       const postCurrentPosition = async () => {
         try {
           const { error } = await supabase.from("trash_can_location").insert([
