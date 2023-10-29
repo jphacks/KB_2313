@@ -1,11 +1,15 @@
-import { GoogleMap, MarkerF} from "@react-google-maps/api";
 import React, {useState, useEffect } from "react";
+import { GoogleMap, MarkerF} from "@react-google-maps/api";
+
+import supabase from "./Supabase";
 import { Map } from "./Map";
+
+import { Position } from "../types/position"
+import { TrashCanLocation } from "../types/trashCanLocation";
+
 import currentMarker from "../assets/map-pin-svgrepo-com.svg";
 import trashCanMarker from "../assets/trash-can-with-cover-from-side-view-svgrepo-com.svg";
-import { Position } from "../types/position"
-import supabase from "./Supabase"
-import { TrashCanLocation } from "../types/trashCanLocation";
+
 
 export default function WasteMap() {
   const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
