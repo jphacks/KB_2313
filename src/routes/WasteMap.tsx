@@ -58,7 +58,7 @@ export default function WasteMap() {
   }, []);
 
   useEffect(() => {
-    if (query.get("isAddtrashcanTrue") === "True") {
+    if (query.get("isAddtrashcanTrue") === "True" && currentPosition.lat !== 0 && currentPosition.lng !== 0) {
       console.log("AddCurrentPosition is called");
       //AddCurrentPosition(currentPosition);
       //const handleAddCurrentPosition = async () => {
