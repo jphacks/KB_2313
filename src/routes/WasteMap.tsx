@@ -132,7 +132,7 @@ export default function WasteMap() {
         ) : (
           "loading"
         )}
-        {isAddtrashcanTrue && <h1>Can is added!</h1>}
+        // {isAddtrashcanTrue && <h1>Can is added!</h1>}
       </>
     );
   }
