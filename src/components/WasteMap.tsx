@@ -2,12 +2,8 @@ import { GoogleMap, MarkerF} from "@react-google-maps/api";
 import React, {useState, useEffect } from "react";
 import { Map } from "./Map";
 import currentMarker from "../assets/map-pin-svgrepo-com.svg";
+import { Position } from "../types/position"
 
-
-type Position = {
-    lat: number;
-    lng: number;
-}
 
 export default function WasteMap() {
   const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
