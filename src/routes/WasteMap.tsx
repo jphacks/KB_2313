@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import {useState, useEffect} from "react";
 import { GoogleMap, MarkerF} from "@react-google-maps/api";
 import { useLocation } from "react-router-dom"
 
@@ -7,7 +7,6 @@ import { Map } from "../components/Map";
 
 import { Position } from "../types/position"
 import { TrashCanLocation } from "../types/trashCanLocation";
-import { AddCurrentPosition } from "../components/AddCurrentPosition";
 
 import currentMarker from "../assets/map-pin-svgrepo-com.svg";
 import trashCanMarker from "../assets/trash-can-with-cover-from-side-view-svgrepo-com.svg";
@@ -81,6 +80,9 @@ export default function WasteMap() {
         }
       }
       postCurrentPosition()
+    }
+    return () => {
+      console.log("AddCurrentPosition is not called");
     }
   }, [currentPosition]);
 
