@@ -8,7 +8,6 @@ import { Map } from "../components/Map";
 import { Position } from "../types/position"
 import { TrashCanLocation } from "../types/trashCanLocation";
 
-import currentMarker from "../assets/map-pin-svgrepo-com.svg";
 import trashCanMarkerBlue from "../assets/trash-can-with-cover-from-side-view-svgrepo-com-blue.svg";
 import trashCanMarker from "../assets/trash-can-with-cover-from-side-view-svgrepo-com.svg";
 
@@ -16,7 +15,6 @@ import trashCanMarker from "../assets/trash-can-with-cover-from-side-view-svgrep
 export default function WasteMap() {
   const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
   const [trashCanLocations, setTrashCanLocations] = useState<TrashCanLocation[]>([]);
-  const [Addtrashcanid, setAddtrashcanid] = useState<number>(0);
   const location = useLocation().search;
   const query = new URLSearchParams(location);
   console.log(query.get("isAddtrashcanTrue"));
