@@ -2,6 +2,7 @@ import { GoogleMap, MarkerF} from "@react-google-maps/api";
 import React, {useState, useEffect } from "react";
 import { Map } from "./Map";
 import currentMarker from "../assets/map-pin-svgrepo-com.svg";
+import trashCanMarker from "../assets/trash-can-with-cover-from-side-view-svgrepo-com.svg";
 import { Position } from "../types/position"
 import supabase from "./Supabase"
 import { TrashCanLocation } from "../types/trashCanLocation";
@@ -60,10 +61,13 @@ export default function WasteMap() {
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={currentPosition}
-            zoom={15}
+            zoom={17}
             onLoad={onLoad}
           >
-              <MarkerF position={currentPosition} icon={{ url: currentMarker }}/>
+            {trashCanLocations.map((trashCanLocation) => (
+              <MarkerF key={trashCanLocation.id} position={trashCanLocation} icon={{ url : trashCanMarker }}/>
+            ))}
+              <MarkerF position={currentPosition} icon={{ url : currentMarker }}/>
           </GoogleMap>
         ) : (
           "loading"
