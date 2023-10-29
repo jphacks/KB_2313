@@ -1,4 +1,5 @@
-import React, {useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
+import { useLocation } from "react-dom"
 import { GoogleMap, MarkerF} from "@react-google-maps/api";
 
 import supabase from "./Supabase";
