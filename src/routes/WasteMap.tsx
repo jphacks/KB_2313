@@ -16,7 +16,7 @@ export default function WasteMap() {
 
   const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
   const [trashCanLocations, setTrashCanLocations] = useState<TrashCanLocation[]>([]);
-  //const [isAddtrashcanTrue, setIsAddtrashcanTrue] = useState<boolean>(false);
+  const [isAddtrashcanTrue, setIsAddtrashcanTrue] = useState<boolean>(false);
 
   const location = useLocation().search;
   const query = new URLSearchParams(location);
@@ -81,6 +81,7 @@ export default function WasteMap() {
             throw fetchError;
           }
           console.log("data is re fetched")
+          setIsAddtrashcanTrue(true);
           setTrashCanLocations((prevLocations) => [...prevLocations, {
             id: data[0].id,
             created_at: data[0].created_at,
@@ -132,7 +133,7 @@ export default function WasteMap() {
         ) : (
           "loading"
         )}
-        // {isAddtrashcanTrue && <h1>Can is added!</h1>}
+        {isAddtrashcanTrue && <h1>Can is added!</h1>}
       </>
     );
   }
