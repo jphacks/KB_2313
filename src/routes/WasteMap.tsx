@@ -16,7 +16,7 @@ export default function WasteMap() {
 
   const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
   const [trashCanLocations, setTrashCanLocations] = useState<TrashCanLocation[]>([]);
-  const [isAddtrashcanTrue, setIsAddtrashcanTrue] = useState<boolean>(false);
+  //const [isAddtrashcanTrue, setIsAddtrashcanTrue] = useState<boolean>(false);
 
   const location = useLocation().search;
   const query = new URLSearchParams(location);
