@@ -3,4 +3,5 @@ export type TrashCanLocation = {
   created_at : string;
   lat : number;
   lng : number;
+  is_trashcan_is_added : boolean;
 }
