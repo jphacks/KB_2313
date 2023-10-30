@@ -102,7 +102,7 @@ export default function WasteMap() {
     return () => {
       console.log("AddCurrentPosition is not called");
     }
-  }, [currentPosition]);
+  }, []);
 
   const { isLoaded, onLoad } = Map();
 
