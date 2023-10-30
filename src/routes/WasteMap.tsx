@@ -18,10 +18,12 @@ export default function WasteMap() {
   const [trashCanLocations, setTrashCanLocations] = useState<TrashCanLocation[]>([]);
   const [isAddtrashcanTrue, setIsAddtrashcanTrue] = useState<boolean>(false);
 
+  // url queryを取得
   const location = useLocation().search;
   const query = new URLSearchParams(location);
   console.log(query.get("isAddtrashcanTrue"));
 
+  // 現在地を取得
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -39,6 +41,7 @@ export default function WasteMap() {
     }
   }, []);
 
+  // DBに登録されたゴミ箱の位置を取得
   useEffect(() => {
     const fetchTrashCanLocations = async () => {
       try {
@@ -61,6 +64,7 @@ export default function WasteMap() {
     fetchTrashCanLocations();
   }, []);
 
+  // DBに現在地にあるゴミ箱の位置を登録
   useEffect(() => {
     if (query.get("isAddtrashcanTrue") === "True" && currentPosition.lat !== 0 && currentPosition.lng !== 0) {
       console.log("AddCurrentPosition is called");
