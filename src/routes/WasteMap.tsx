@@ -11,38 +11,24 @@ import { TrashCanLocation } from "../types/trashCanLocation";
 import trashCanMarkerBlue from "../assets/trash-can-with-cover-from-side-view-svgrepo-com-blue.svg";
 import trashCanMarker from "../assets/trash-can-with-cover-from-side-view-svgrepo-com.svg";
 
+function getCurrentPosition({ setCurrentPosition }: { setCurrentPosition: (position: Position) => void }) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setCurrentPosition({ lat: latitude, lng: longitude });
+        console.log("currentPosition is set")
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  } else {
+    console.error("Error: Geolocation is not supported");
+  }
+}
 
-export default function WasteMap() {
-
-  const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
-  const [trashCanLocations, setTrashCanLocations] = useState<TrashCanLocation[]>([]);
-  const [isAddtrashcanTrue, setIsAddtrashcanTrue] = useState<boolean>(false);
-
-  // url queryを取得
-  const location = useLocation().search;
-  const query = new URLSearchParams(location);
-  console.log(query.get("isAddtrashcanTrue"));
-
-  // 現在地を取得
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setCurrentPosition({ lat: latitude, lng: longitude });
-          console.log("currentPosition is set")
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    } else {
-      console.error("Error: Geolocation is not supported");
-    }
-  }, []);
-
-  // DBに登録されたゴミ箱の位置を取得
-  useEffect(() => {
+  function fetchTrashCanLocations({ setTrashCanLocations }: { setTrashCanLocations: (trashCanLocations: TrashCanLocation[]) => void }) {
     const fetchTrashCanLocations = async () => {
       try {
         const { data, error } = await supabase.from("trash_can_location").select("*");
@@ -62,6 +48,24 @@ export default function WasteMap() {
       }
     };
     fetchTrashCanLocations();
+  }
+
+
+export default function WasteMap() {
+
+  const [currentPosition, setCurrentPosition] = useState<Position>({lat: 0, lng: 0});
+  const [trashCanLocations, setTrashCanLocations] = useState<TrashCanLocation[]>([]);
+  const [isAddtrashcanTrue, setIsAddtrashcanTrue] = useState<boolean>(false);
+
+  // url queryを取得
+  const location = useLocation().search;
+  const query = new URLSearchParams(location);
+  console.log(query.get("isAddtrashcanTrue"));
+
+  useEffect(() => {
+    getCurrentPosition({ setCurrentPosition });
+    
+    fetchTrashCanLocations({ setTrashCanLocations });
   }, []);
 
   // DBに現在地にあるゴミ箱の位置を登録
